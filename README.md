@@ -5,3 +5,4 @@ This repository should currently be considered work-in-progress.
 
 #### Lessons ####
 - Lesson 01: Introduction to Arduino
+- Lesson 02: Loops and If Statements
