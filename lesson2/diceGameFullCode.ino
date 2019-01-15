@@ -53,26 +53,6 @@ void setup() {
 }
 
 
-
-void showNumber(int number) {
-  digitalWrite(first, HIGH);
-  if (number >= 2) {
-    digitalWrite(second, HIGH);
-  }
-  if (number >= 3) {
-    digitalWrite(third, HIGH);    
-  }
-  if (number >= 4) {
-    digitalWrite(fourth, HIGH);    
-  }
-  if (number >= 5) {
-    digitalWrite(fifth, HIGH);    
-  }
-  if (number == 6) {
-    digitalWrite(sixth, HIGH);    
-  }
-}
-
 void loop() {
   // if button is pressed - throw the dice
   pressed = digitalRead(button);
