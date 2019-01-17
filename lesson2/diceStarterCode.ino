@@ -2,6 +2,7 @@
  Arduino Dice :)
 
  This example shows how to simulate throwing a dice with 6 LEDs
+ By Esther van der Stappen
 
  */
 
@@ -22,13 +23,10 @@ void setup() {
   // set all LED pins to OUTPUT
 
   // set buttin pin to INPUT
-  
+
   // initialize random seed by noise from analog pin 0 (should be unconnected)
   randomSeed(analogRead(0));
-
-
 }
-
 
 void loop() {
   // if button is pressed - throw the dice
