@@ -24,8 +24,6 @@ int third = 4;
 int fourth = 5;
 int fifth = 6;
 int sixth = 7;
-//arrays
-int ledPins[6] = {2,3,4,5,6,7};
 
 // pin for the button switch
 int button = 12;
@@ -34,16 +32,10 @@ int pressed = 0;
 
 void setup() {
   // set all LED pins to OUTPUT
-  pinMode(first, OUTPUT);
-  pinMode(second, OUTPUT);
-  pinMode(third, OUTPUT);
-  pinMode(fourth, OUTPUT);
-  pinMode(fifth, OUTPUT);
-  pinMode(sixth, OUTPUT);
   //using arrays
-  // for(int i = 0; i<=6; i++) {
-  //   pinMode(ledPins[i], OUTPUT);
-  // }
+  for(int i = first; i<=sixth; i++) {
+    pinMode(i, OUTPUT);
+  }
   
   // set buttin pin to INPUT
   pinMode(button, INPUT);
@@ -65,17 +57,10 @@ void loop() {
 
   if (pressed == HIGH) {
     // remove previous number to LOW
-    digitalWrite(first, LOW);
-    digitalWrite(second, LOW);
-    digitalWrite(third, LOW);
-    digitalWrite(fourth, LOW);
-    digitalWrite(fifth, LOW);
-    digitalWrite(sixth, LOW);
     // using arrays
-    // for(int i = 0; i<=6; i++) {
-    //   digitalWrite(ledPins[i], LOW);
-    // }
-
+    for(int i = first; i <= sixth; i++) {
+      digitalWrite(i, LOW);
+    }
     
     // get a random number in the range [1,6]
     int thrownNumber = random(1,7);
