@@ -38,6 +38,10 @@ void setup() {
   pinMode(fourth, OUTPUT);
   pinMode(fifth, OUTPUT);
   pinMode(sixth, OUTPUT);
+  //using arrays
+  // for(int i = first; i<=sixth; i++) {
+  //   pinMode(i, OUTPUT);
+  // }
   
   // set buttin pin to INPUT
   pinMode(button, INPUT);
@@ -65,26 +69,30 @@ void loop() {
     digitalWrite(fourth, LOW);
     digitalWrite(fifth, LOW);
     digitalWrite(sixth, LOW);
+    // using arrays
+    // for(int i = first; i <= sixth; i++) {
+    //   digitalWrite(i, LOW);
+    // }
     
     // get a random number in the range [1,6]
     int thrownNumber = random(1,7);
     
     //write IF statements to light up the lights
     digitalWrite(first, HIGH);
-    if (number >= 2) {
+    if (thrownNumber >= 2) {
       digitalWrite(second, HIGH);
     }
-    if (number >= 3) {
+    if (thrownNumber >= 3) {
       digitalWrite(third, HIGH);    
     }
-    if (number >= 4) {
+    if (thrownNumber >= 4) {
       digitalWrite(fourth, HIGH);    
     }
-    if (number >= 5) {
+    if (thrownNumber >= 5) {
       digitalWrite(fifth, HIGH);    
     }
-    if (number == 6) {
-      digitalWrite(sixth, HIGH);    
+    if (thrownNumber == 6) {
+      digitalWrite(sixth, HIGH);     
     }
       
   } 
