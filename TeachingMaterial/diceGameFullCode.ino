@@ -24,7 +24,8 @@ int third = 4;
 int fourth = 5;
 int fifth = 6;
 int sixth = 7;
-//arrays
+
+// Using arrays
 int ledPins[6] = {2,3,4,5,6,7};
 
 // pin for the button switch
@@ -34,13 +35,14 @@ int pressed = 0;
 
 void setup() {
   // set all LED pins to OUTPUT
-  pinMode(first, OUTPUT);
-  pinMode(second, OUTPUT);
-  pinMode(third, OUTPUT);
-  pinMode(fourth, OUTPUT);
-  pinMode(fifth, OUTPUT);
-  pinMode(sixth, OUTPUT);
-  //using arrays
+  pinMode(ledPins[0], OUTPUT);
+  pinMode(ledPins[1], OUTPUT);
+  pinMode(ledPins[2], OUTPUT);
+  pinMode(ledPins[3], OUTPUT);
+  pinMode(ledPins[4], OUTPUT);
+  pinMode(ledPins[5], OUTPUT);
+  
+  // Using arrays
   // for(int i = 0; i<=6; i++) {
   //   pinMode(ledPins[i], OUTPUT);
   // }
@@ -71,7 +73,8 @@ void loop() {
     digitalWrite(fourth, LOW);
     digitalWrite(fifth, LOW);
     digitalWrite(sixth, LOW);
-    // using arrays
+    
+    // Using arrays
     // for(int i = 0; i<=6; i++) {
     //   digitalWrite(ledPins[i], LOW);
     // }
@@ -81,7 +84,9 @@ void loop() {
     int thrownNumber = random(1,7);
     
     //write IF statements to light up the lights
+    // Using arrays, change first, second, ... to ledPins[0], ledPins[1] ...
     digitalWrite(first, HIGH);
+    
     if (thrownNumber >= 2) {
       digitalWrite(second, HIGH);
     }
