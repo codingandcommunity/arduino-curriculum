@@ -38,12 +38,14 @@ void loop(){
  }
 }
 
+
 void interrupt(){
  delayMicroseconds(20000);
- //IF button not Pressed
+ //IF button not Pressed exit function
  if( digitalRead( button ) == HIGH ){
    return;
- } //else increase speed and change score
+ } //else increase speed and if midLED is on
+  //incrament score, else  you lost
  tempo = tempo * 9 / 10;
  if( midLed ){
    score++;
