@@ -1,88 +1,59 @@
-/* 
- Arduino Dice :)
-
- This example shows how to simulate throwing a dice with 6 LEDs.
-
- The circuit:
- * 6 LEDs attached to consecutive digital pins (with 220 Ohm resistors)
- * Button switch connected to digital pin (see circuit on https://www.arduino.cc/en/Tutorial/Button)
-
- Created 5 Jan 2017
- By Esther van der Stappen
- 
- This example code is in the public domain.
-
- */
-
-// set to 1 if we're debugging
-#define DEBUG 0
-
-// 6 consecutive digital pins for the LEDs
-int first = 2;
-int second = 3;
-int third = 4;
-int fourth = 5;
-int fifth = 6;
-int sixth = 7;
-
+//arrays
+int ledPins[8] = {3,4,5,6,7,8,9,10};
+//speed
+double tempo = 300;
+int score = 0;
+boolean midLed = false;
 // pin for the button switch
 int button = 12;
-// value to check state of button switch
-int pressed = 0;
 
-void setup() {
-  // set all LED pins to OUTPUT
-  //using arrays
-  for(int i = first; i<=sixth; i++) {
-    pinMode(i, OUTPUT);
-  }
-  
-  // set buttin pin to INPUT
-  pinMode(button, INPUT);
-  
-  // initialize random seed by noise from analog pin 0 (should be unconnected)
-  randomSeed(analogRead(0));
+void interrupt();
+void endFunction();
 
-  // if we're debugging, connect to serial 
-  #ifdef DEBUG
-    Serial.begin(9600);
-  #endif
-
+void setup(){
+ for( int i = 0 ; i < 8 ; i++ ){
+   pinMode( ledPins[i] , OUTPUT );
+ }
+ pinMode( button , INPUT );
+ attachInterrupt( 0 , interrupt , FALLING );
 }
 
+void loop(){
+ for( int i = 0 ; i < 8 ; i++ ){
+   if (i == 6) {
+     digitalWrite( ledPins[i] , HIGH);
+     midLed = true;
+     delay( tempo );
+     digitalWrite( ledPins[i] , LOW);
+     midLed = false;
+   } else {
+      digitalWrite( ledPins[i] , HIGH );
+      delay( tempo );
+      digitalWrite( ledPins[i] , LOW );
+   }
+ }
+}
 
-void loop() {
-  // if button is pressed - throw the dice
-  pressed = digitalRead(button);
+void endFunction(){
+ Serial.begin(9600);
+ Serial.print( "Your score: " );
+ Serial.println( score );
+ digitalWrite( ledPins[3] , HIGH );
+ while(1){
+   //game over
+ }
+}
 
-  if (pressed == HIGH) {
-    // remove previous number to LOW
-    // using arrays
-    for(int i = first; i <= sixth; i++) {
-      digitalWrite(i, LOW);
-    }
-    
-    // get a random number in the range [1,6]
-    int thrownNumber = random(1,7);
-    
-    //write IF statements to light up the lights
-    digitalWrite(first, HIGH);
-    if (thrownNumber >= 2) {
-      digitalWrite(second, HIGH);
-    }
-    if (thrownNumber >= 3) {
-      digitalWrite(third, HIGH);    
-    }
-    if (thrownNumber >= 4) {
-      digitalWrite(fourth, HIGH);    
-    }
-    if (thrownNumber >= 5) {
-      digitalWrite(fifth, HIGH);    
-    }
-    if (thrownNumber == 6) {
-      digitalWrite(sixth, HIGH);     
-    }
-      
-  } 
-
+void interrupt(){
+ delayMicroseconds(20000);
+ if( digitalRead( button ) == HIGH ){
+   return;
+ }
+ tempo = tempo * 9 / 10;
+ if( midLed ){
+   score++;
+ }
+ else{
+   endFunction();
+ }
 }
