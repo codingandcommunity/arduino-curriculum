@@ -6,9 +6,8 @@ int score = 0;
 boolean midLed = false;
 // pin for the button switch
 int button = 12;
-//declare functions
+//declare interrupt function
 void interrupt();
-void endFunction();
 
 void setup(){
  //set ledPins to OUTPUT
@@ -39,16 +38,6 @@ void loop(){
  }
 }
 
-void endFunction(){
- Serial.begin(9600);
- Serial.print( "Your score: " );
- Serial.println( score );
- digitalWrite( ledPins[3] , HIGH );
- while(1){
-   //game over
- }
-}
-
 void interrupt(){
  delayMicroseconds(20000);
  //IF button not Pressed
@@ -60,6 +49,13 @@ void interrupt(){
    score++;
  }
  else{
-   endFunction();
+    //ya lost
+    Serial.begin(9600);
+    Serial.print( "Your score: " );
+    Serial.println( score );
+    digitalWrite( ledPins[3] , HIGH );
+    while(1){
+    //game over
+    }
  }
 }
