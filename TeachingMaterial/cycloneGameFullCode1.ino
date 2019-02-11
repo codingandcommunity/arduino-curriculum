@@ -18,12 +18,17 @@
 #define DEBUG 0
 
 // 6 consecutive digital pins for the LEDs
-int ledPins[] = {2, 3, 4, 5, 6, 7};
+int ledPins[] = {13, 12, 11, 10, 9, 8};
 
 // pin for the button switch
-int button = 12;
+int button = 7;
+
+// pin for buzzer
+int buzzer = 6;
 // value to check state of button switch
 int pressed = 0;
+
+int score = 0;
 
 void setup() {
   // set all LED pins to OUTPUT
@@ -32,11 +37,18 @@ void setup() {
     pinMode(i, OUTPUT);
   }
   
-  // set buttin pin to INPUT
+  // set button pin to INPUT
   pinMode(button, INPUT);
+  // set buzzer pin to OUTPUT
+  pinMode(buzzer, OUTPUT);
   
 }
 
+void buzzer(int frequency) {
+  tone(buzzer, frequency);
+  delay(1000);
+  noTone(buzzer);
+}
 
 void loop() {
   // if button is pressed - throw the dice
@@ -47,10 +59,15 @@ void loop() {
   while(true) {
     digitalWrite(ledPins[currentLight], HIGH);
 
-    if (pressed == HIGH && currentLight == 5) {
-      Serial.print("Good job!");
-    } else if (pressed == HIGH && currentLight != 5) {
-      Serial.print("Try again!");
+    if (pressed == LOW && currentLight == 5) {
+      Serial.print("You win!\nYour score is:", score);
+      buzzer(1000);
+      score++;
+    } 
+    else if (pressed == LOW && currentLight != 5) {
+      Serial.print("You lose\nYour score is:", score);
+      buzzer(1500);
+      score--;
     }
 
     delay(delayTime);
