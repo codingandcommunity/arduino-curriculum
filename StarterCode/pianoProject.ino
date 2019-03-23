@@ -1,15 +1,9 @@
 #include "pitches.h"
 #define ACTIVATED LOW
 
+//Pick pins for the Buzzer 
+//pick pins for the Piano Buttons
 
-const int PIEZO = 11;
-const int LED = 13;
-
-int buttonSong = 8;
-const int BUTTON_C = 6;
-const int BUTTON_AS = 4;
-const int BUTTON_A = 3;
-const int BUTTON_G = 2;
 
 
 void setup()
