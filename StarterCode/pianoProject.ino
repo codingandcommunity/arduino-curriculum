@@ -1,5 +1,4 @@
 #include "pitches.h"
-#define ACTIVATED LOW
 
 //Pick pins for the Buzzer 
 //pick pins for the Piano Buttons
